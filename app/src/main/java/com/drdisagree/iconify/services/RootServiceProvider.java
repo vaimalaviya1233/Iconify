@@ -13,6 +13,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.drdisagree.iconify.utils.extension.MethodInterface;
+import com.drdisagree.iconify.utils.overlay.FabricatedUtil;
 import com.drdisagree.iconify.utils.overlay.fabricated.FabricatedOverlay;
 import com.drdisagree.iconify.utils.overlay.fabricated.FabricatedOverlayEntry;
 import com.topjohnwu.superuser.Shell;
@@ -41,6 +43,7 @@ public class RootServiceProvider extends RootService {
         private static final UserHandle currentUser;
         private static final int currentUserId;
         private static IOverlayManager mOMS;
+        private static Class<?> oiClass;
         private static Class<?> foClass;
         private static Class<?> fobClass;
         private static Class<?> omtbClass;
@@ -53,6 +56,9 @@ public class RootServiceProvider extends RootService {
             }
 
             try {
+                if (oiClass == null) {
+                    oiClass = Class.forName("android.content.om.OverlayIdentifier");
+                }
                 if (foClass == null) {
                     foClass = Class.forName("android.content.om.FabricatedOverlay");
                 }
@@ -121,6 +127,17 @@ public class RootServiceProvider extends RootService {
             }
         }
 
+        @Override
+        public void enableOverlayWithIdentifier(List<String> packages) throws RemoteException {
+            for (String p : packages) {
+                if (!p.startsWith("IconifyComponent")) {
+                    p = "IconifyComponent" + p;
+                }
+                OverlayIdentifier identifier = generateOverlayIdentifier(p);
+                switchOverlayWithIdentifier(identifier, true);
+            }
+        }
+
         /**
          * Request that an overlay package is enabled and any other overlay packages with the same
          * target package are disabled.
@@ -149,11 +166,48 @@ public class RootServiceProvider extends RootService {
             }
         }
 
+        @Override
+        public void disableOverlayWithIdentifier(List<String> packages) throws RemoteException {
+            for (String p : packages) {
+                if (!p.startsWith("IconifyComponent")) {
+                    p = "IconifyComponent" + p;
+                }
+                OverlayIdentifier identifier = generateOverlayIdentifier(p);
+                switchOverlayWithIdentifier(identifier, false);
+            }
+        }
+
         private void switchOverlay(String packageName, boolean enable) {
             try {
                 getOMS().setEnabled(packageName, enable, currentUserId);
             } catch (Exception e) {
                 Log.e(TAG, "switchOverlay: ", e);
+            }
+        }
+
+        private void switchOverlayWithIdentifier(OverlayIdentifier identifier, boolean enable) {
+            try {
+                Object omtbInstance = omtbClass.newInstance();
+
+                omtbClass.getMethod(
+                        "setEnabled",
+                        OverlayIdentifier.class,
+                        boolean.class,
+                        int.class
+                ).invoke(
+                        omtbInstance,
+                        identifier,
+                        enable,
+                        currentUserId
+                );
+
+                Object omtInstance = omtbClass.getMethod(
+                        "build"
+                ).invoke(omtbInstance);
+
+                commit(omtInstance);
+            } catch (Exception e) {
+                Log.e(TAG, "switchOverlayWithIdentifier: ", e);
             }
         }
 
@@ -165,23 +219,14 @@ public class RootServiceProvider extends RootService {
          * the existing overlay will be replaced by the newly registered overlay and the enabled
          * state of the overlay will be left unchanged if the target package and target overlayable
          * have not changed.
-         * <p>
-         * Example:
-         * FabricatedOverlay fabricatedOverlay = new FabricatedOverlay(
-         * name,
-         * targetPackage,
-         * owningPackage
-         * );
-         * fabricatedOverlay.setColor("android:color/holo_blue_light", Color.RED);
-         * fabricatedOverlay.setColor("android:color/holo_blue_dark", Color.GREEN);
-         * registerFabricatedOverlay(fabricatedOverlay);
          *
          * @param overlay the overlay to register with the overlay manager
          */
-        public void registerFabricatedOverlay(@NonNull FabricatedOverlay overlay) {
-            OverlayManagerTransaction transaction = OverlayManagerTransaction.newInstance();
-
+        @Override
+        public void registerFabricatedOverlay(String overlayName, String targetPackage, String resourceType, String resourceName, String resourceValue) {
             try {
+                FabricatedOverlay overlay = FabricatedUtil.getFabricatedOverlay(overlayName, targetPackage, resourceType, resourceName, resourceValue);
+
                 Object fobInstance = fobClass.getConstructor(
                         String.class,
                         String.class,
@@ -224,7 +269,6 @@ public class RootServiceProvider extends RootService {
                 Object omtInstance = omtbClass.getMethod("build").invoke(omtbInstance);
 
                 commit(omtInstance);
-                Log.i(TAG, "registerFabricatedOverlay: " + overlay.overlayName + " registered");
             } catch (Exception e) {
                 Log.e(TAG, "registerFabricatedOverlay: ", e);
             }
@@ -232,19 +276,17 @@ public class RootServiceProvider extends RootService {
 
         /**
          * Disables and removes the overlay from the overlay manager for all users.
-         * <p>
-         * OverlayIdentifier identifier = FabricatedOverlay.generateOverlayIdentifier(
-         * "test",
-         * "com.android.shell"
-         * );
-         * if (identifier != null) {
-         * unregisterFabricatedOverlay(identifier);
-         * }
          *
          * @param overlay the overlay to disable and remove
          */
-        public void unregisterFabricatedOverlay(@NonNull OverlayIdentifier overlay) {
+        @Override
+        public void unregisterFabricatedOverlay(@NonNull String packageName) {
             try {
+                OverlayIdentifier overlay = generateOverlayIdentifier(packageName);
+                if (overlay == null) {
+                    return;
+                }
+
                 Object omtbInstance = omtbClass.newInstance();
                 omtbClass.getMethod(
                         "unregisterFabricatedOverlay",
@@ -306,6 +348,19 @@ public class RootServiceProvider extends RootService {
             return Shell.cmd(command.toArray(new String[0])).exec().getOut().toArray(new String[0]);
         }
 
+        public OverlayIdentifier generateOverlayIdentifier(String packageName) throws RemoteException {
+            return generateOverlayIdentifier(packageName, "com.android.shell");
+        }
+
+        private static OverlayIdentifier generateOverlayIdentifier(String packageName, String sourcePackage) {
+            try {
+                return (OverlayIdentifier) oiClass.getConstructor(String.class, String.class).newInstance(sourcePackage, packageName);
+            } catch (Exception e) {
+                Log.e("FabricatedOverlay", "generateOverlayIdentifier: ", e);
+                return null;
+            }
+        }
+
         private void commit(Object transaction) throws Exception {
             getOMS().commit((OverlayManagerTransaction) transaction);
         }
@@ -313,15 +368,9 @@ public class RootServiceProvider extends RootService {
         /**
          * Run a method with root.
          */
+        @Override
         public void runWithRoot(MethodInterface method) {
             method.run();
-        }
-
-        /**
-         * Interface for running a method with root.
-         */
-        public interface MethodInterface {
-            void run();
         }
     }
 }

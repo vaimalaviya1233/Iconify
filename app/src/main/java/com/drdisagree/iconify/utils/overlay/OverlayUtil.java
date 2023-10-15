@@ -34,9 +34,9 @@ public class OverlayUtil {
 
     public static boolean isOverlayEnabled(String pkgName) {
         try {
-            return Iconify.mRootServiceProvider.isOverlayEnabled(pkgName);
+            return Iconify.getRootService().isOverlayEnabled(pkgName);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "isOverlayEnabled: ", e);
             return false;
         }
     }
@@ -47,7 +47,7 @@ public class OverlayUtil {
 
     static boolean isOverlayInstalled(String pkgName) {
         try {
-            return Iconify.mRootServiceProvider.isOverlayInstalled(pkgName);
+            return Iconify.getRootService().isOverlayInstalled(pkgName);
         } catch (Exception e) {
             Log.e(TAG, "isOverlayInstalled: ", e);
             return getEnabledOverlayList().contains(pkgName);
@@ -57,36 +57,36 @@ public class OverlayUtil {
     public static void enableOverlay(String pkgName) {
         try {
             Prefs.putBoolean(pkgName, true);
-            Iconify.mRootServiceProvider.enableOverlay(Collections.singletonList(pkgName));
+            Iconify.getRootService().enableOverlay(Collections.singletonList(pkgName));
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "enableOverlay: ", e);
         }
     }
 
     public static void enableOverlayExclusive(String pkgName) {
         try {
             Prefs.putBoolean(pkgName, true);
-            Iconify.mRootServiceProvider.enableOverlayExclusive(pkgName);
+            Iconify.getRootService().enableOverlayExclusive(pkgName);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "enableOverlayExclusive: ", e);
         }
     }
 
     public static void enableOverlayExclusiveInCategory(String packageName) {
         try {
             Prefs.putBoolean(packageName, true);
-            Iconify.mRootServiceProvider.enableOverlayExclusiveInCategory(packageName);
+            Iconify.getRootService().enableOverlayExclusiveInCategory(packageName);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "enableOverlayExclusiveInCategory: ", e);
         }
     }
 
     public static void disableOverlay(String pkgName) {
         try {
             Prefs.putBoolean(pkgName, false);
-            Iconify.mRootServiceProvider.disableOverlay(Collections.singletonList(pkgName));
+            Iconify.getRootService().disableOverlay(Collections.singletonList(pkgName));
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "disableOverlay: ", e);
         }
     }
 
@@ -95,7 +95,7 @@ public class OverlayUtil {
             for (String pkgName : pkgNames) {
                 Prefs.putBoolean(pkgName, true);
             }
-            Iconify.mRootServiceProvider.enableOverlay(Arrays.asList(pkgNames));
+            Iconify.getRootService().enableOverlay(Arrays.asList(pkgNames));
         } catch (Exception e) {
             Log.e(TAG, "enableOverlays: ", e);
         }
@@ -106,7 +106,7 @@ public class OverlayUtil {
             for (String pkgName : pkgNames) {
                 Prefs.putBoolean(pkgName, false);
             }
-            Iconify.mRootServiceProvider.disableOverlay(Arrays.asList(pkgNames));
+            Iconify.getRootService().disableOverlay(Arrays.asList(pkgNames));
         } catch (Exception e) {
             Log.e(TAG, "disableOverlays: ", e);
         }
@@ -125,9 +125,9 @@ public class OverlayUtil {
 
             try {
                 if (state) {
-                    Iconify.mRootServiceProvider.enableOverlay(Collections.singletonList(pkgName));
+                    Iconify.getRootService().enableOverlay(Collections.singletonList(pkgName));
                 } else {
-                    Iconify.mRootServiceProvider.disableOverlay(Collections.singletonList(pkgName));
+                    Iconify.getRootService().disableOverlay(Collections.singletonList(pkgName));
                 }
             } catch (Exception e) {
                 Log.e(TAG, "changeOverlayState: ", e);
@@ -153,7 +153,7 @@ public class OverlayUtil {
             int numberOfOverlaysInstalled = Integer.parseInt(Shell.cmd("find /" + Resources.OVERLAY_DIR + "/ -maxdepth 1 -type f -print| wc -l").exec().getOut().get(0));
             return numberOfOverlaysInAssets <= numberOfOverlaysInstalled;
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "matchOverlayAgainstAssets: ", e);
             return false;
         }
     }

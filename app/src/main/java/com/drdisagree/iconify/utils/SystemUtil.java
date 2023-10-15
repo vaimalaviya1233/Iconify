@@ -49,7 +49,7 @@ public class SystemUtil {
         if (currentTime - lastClickTime >= CLICK_DELAY_TIME) {
             lastClickTime = currentTime;
             try {
-                Iconify.mRootServiceProvider.restartSystemUI();
+                Iconify.getRootService().restartSystemUI();
             } catch (Exception e) {
                 e.printStackTrace();
             }
