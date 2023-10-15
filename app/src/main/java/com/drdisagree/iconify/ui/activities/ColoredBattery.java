@@ -50,11 +50,11 @@ public class ColoredBattery extends BaseActivity implements ColorPickerDialogLis
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if (isChecked) {
                     Prefs.putString(COLORED_BATTERY_CHECK, "On");
-                    FabricatedUtil.buildAndEnableOverlay(FRAMEWORK_PACKAGE, FABRICATED_COLORED_BATTERY, "bool", "config_batterymeterDualTone", "1");
+                    FabricatedUtil.buildAndEnableOverlay(FABRICATED_COLORED_BATTERY, FRAMEWORK_PACKAGE, "bool", "config_batterymeterDualTone", "1");
                 } else {
                     Prefs.putString(COLORED_BATTERY_CHECK, "Off");
                     FabricatedUtil.disableOverlay(FABRICATED_COLORED_BATTERY);
-                    FabricatedUtil.buildAndEnableOverlay(FRAMEWORK_PACKAGE, FABRICATED_COLORED_BATTERY, "bool", "config_batterymeterDualTone", "0");
+                    FabricatedUtil.buildAndEnableOverlay(FABRICATED_COLORED_BATTERY, FRAMEWORK_PACKAGE, "bool", "config_batterymeterDualTone", "0");
 
                     if (!Objects.equals(Prefs.getString(FABRICATED_BATTERY_COLOR_BG), STR_NULL))
                         FabricatedUtil.disableOverlay(FABRICATED_BATTERY_COLOR_BG);

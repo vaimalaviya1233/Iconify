@@ -77,9 +77,9 @@ public class XposedQuickSettings extends BaseActivity {
                 binding.resetQqsTopMargin.setVisibility(View.VISIBLE);
                 Prefs.putInt(FABRICATED_QQS_TOPMARGIN, qqsTopMargin[0]);
                 FabricatedUtil.buildAndEnableOverlays(
-                        new Object[]{FRAMEWORK_PACKAGE, "quick_qs_offset_height", "dimen", "quick_qs_offset_height", qqsTopMargin[0] + "dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, "qqs_layout_margin_top", "dimen", "qqs_layout_margin_top", qqsTopMargin[0] + "dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, "qs_header_row_min_height", "dimen", "qs_header_row_min_height", qqsTopMargin[0] + "dp"}
+                        "quick_qs_offset_height", FRAMEWORK_PACKAGE, "dimen", "quick_qs_offset_height", qqsTopMargin[0] + "dp",
+                        "qqs_layout_margin_top", SYSTEMUI_PACKAGE, "dimen", "qqs_layout_margin_top", qqsTopMargin[0] + "dp",
+                        "qs_header_row_min_height", SYSTEMUI_PACKAGE, "dimen", "qs_header_row_min_height", qqsTopMargin[0] + "dp"
                 );
                 RPrefs.putInt(HEADER_QQS_TOPMARGIN, qqsTopMargin[0]);
             }
@@ -112,9 +112,9 @@ public class XposedQuickSettings extends BaseActivity {
                 binding.resetQsTopMargin.setVisibility(View.VISIBLE);
                 Prefs.putInt(FABRICATED_QS_TOPMARGIN, qsTopMargin[0]);
                 FabricatedUtil.buildAndEnableOverlays(
-                        new Object[]{FRAMEWORK_PACKAGE, "quick_qs_total_height", "dimen", "quick_qs_total_height", qsTopMargin[0] + "dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, "qs_panel_padding_top", "dimen", "qs_panel_padding_top", qsTopMargin[0] + "dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, "qs_panel_padding_top_combined_headers", "dimen", "qs_panel_padding_top_combined_headers", qsTopMargin[0] + "dp"}
+                        "quick_qs_total_height", FRAMEWORK_PACKAGE, "dimen", "quick_qs_total_height", qsTopMargin[0] + "dp",
+                        "qs_panel_padding_top", SYSTEMUI_PACKAGE, "dimen", "qs_panel_padding_top", qsTopMargin[0] + "dp",
+                        "qs_panel_padding_top_combined_headers", SYSTEMUI_PACKAGE, "dimen", "qs_panel_padding_top_combined_headers", qsTopMargin[0] + "dp"
                 );
             }
         });

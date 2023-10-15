@@ -52,9 +52,9 @@ public class VolumePanel extends BaseActivity {
 
                 Prefs.putInt(VOLUME_PANEL_BACKGROUND_WIDTH, 1);
                 FabricatedUtil.buildAndEnableOverlays(
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_VOLUME_DIALOG_SLIDER_WIDTH, "dimen", "volume_dialog_slider_width", "42dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_VOLUME_DIALOG_TRACK_WIDTH, "dimen", "volume_dialog_track_width", "4dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_ROUNDED_SLIDER_TRACK_INSET, "dimen", "rounded_slider_track_inset", "22dp"}
+                        FABRICATED_VOLUME_DIALOG_SLIDER_WIDTH, SYSTEMUI_PACKAGE, "dimen", "volume_dialog_slider_width", "42dp",
+                        FABRICATED_VOLUME_DIALOG_TRACK_WIDTH, SYSTEMUI_PACKAGE, "dimen", "volume_dialog_track_width", "4dp",
+                        FABRICATED_ROUNDED_SLIDER_TRACK_INSET, SYSTEMUI_PACKAGE, "dimen", "rounded_slider_track_inset", "22dp"
                 );
                 FabricatedUtil.disableOverlay(FABRICATED_ROUNDED_SLIDER_TRACK_INSET);
             } else {
@@ -71,9 +71,9 @@ public class VolumePanel extends BaseActivity {
 
                 Prefs.putInt(VOLUME_PANEL_BACKGROUND_WIDTH, 2);
                 FabricatedUtil.buildAndEnableOverlays(
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_VOLUME_DIALOG_SLIDER_WIDTH, "dimen", "volume_dialog_slider_width", "42dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_VOLUME_DIALOG_TRACK_WIDTH, "dimen", "volume_dialog_track_width", "42dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_ROUNDED_SLIDER_TRACK_INSET, "dimen", "rounded_slider_track_inset", "0dp"}
+                        FABRICATED_VOLUME_DIALOG_SLIDER_WIDTH, SYSTEMUI_PACKAGE, "dimen", "volume_dialog_slider_width", "42dp",
+                        FABRICATED_VOLUME_DIALOG_TRACK_WIDTH, SYSTEMUI_PACKAGE, "dimen", "volume_dialog_track_width", "42dp",
+                        FABRICATED_ROUNDED_SLIDER_TRACK_INSET, SYSTEMUI_PACKAGE, "dimen", "rounded_slider_track_inset", "0dp"
                 );
             } else {
                 Prefs.putInt(VOLUME_PANEL_BACKGROUND_WIDTH, 0);
@@ -89,9 +89,9 @@ public class VolumePanel extends BaseActivity {
 
                 Prefs.putInt(VOLUME_PANEL_BACKGROUND_WIDTH, 3);
                 FabricatedUtil.buildAndEnableOverlays(
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_VOLUME_DIALOG_SLIDER_WIDTH, "dimen", "volume_dialog_slider_width", "42dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_VOLUME_DIALOG_TRACK_WIDTH, "dimen", "volume_dialog_track_width", "0dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_ROUNDED_SLIDER_TRACK_INSET, "dimen", "rounded_slider_track_inset", "24dp"}
+                        FABRICATED_VOLUME_DIALOG_SLIDER_WIDTH, SYSTEMUI_PACKAGE, "dimen", "volume_dialog_slider_width", "42dp",
+                        FABRICATED_VOLUME_DIALOG_TRACK_WIDTH, SYSTEMUI_PACKAGE, "dimen", "volume_dialog_track_width", "0dp",
+                        FABRICATED_ROUNDED_SLIDER_TRACK_INSET, SYSTEMUI_PACKAGE, "dimen", "rounded_slider_track_inset", "24dp"
                 );
                 FabricatedUtil.disableOverlay(FABRICATED_ROUNDED_SLIDER_TRACK_INSET);
             } else {

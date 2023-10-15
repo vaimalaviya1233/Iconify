@@ -40,15 +40,15 @@ public class BasicColors extends BaseActivity implements ColorPickerDialogListen
 
     public static void applyPrimaryColors() {
         FabricatedUtil.buildAndEnableOverlays(
-                new Object[]{FRAMEWORK_PACKAGE, COLOR_ACCENT_PRIMARY, "color", "holo_blue_light", colorToSpecialHex(Integer.parseInt(Prefs.getString(COLOR_ACCENT_PRIMARY)))},
-                new Object[]{FRAMEWORK_PACKAGE, COLOR_ACCENT_PRIMARY_LIGHT, "color", "holo_green_light", colorToSpecialHex(Integer.parseInt(Prefs.getString(COLOR_ACCENT_PRIMARY)))}
+                COLOR_ACCENT_PRIMARY, FRAMEWORK_PACKAGE, "color", "holo_blue_light", colorToSpecialHex(Integer.parseInt(Prefs.getString(COLOR_ACCENT_PRIMARY))),
+                COLOR_ACCENT_PRIMARY_LIGHT, FRAMEWORK_PACKAGE, "color", "holo_green_light", colorToSpecialHex(Integer.parseInt(Prefs.getString(COLOR_ACCENT_PRIMARY)))
         );
     }
 
     public static void applySecondaryColors() {
         FabricatedUtil.buildAndEnableOverlays(
-                new Object[]{FRAMEWORK_PACKAGE, COLOR_ACCENT_SECONDARY, "color", "holo_blue_dark", colorToSpecialHex(Integer.parseInt(Prefs.getString(COLOR_ACCENT_SECONDARY)))},
-                new Object[]{FRAMEWORK_PACKAGE, COLOR_ACCENT_SECONDARY_LIGHT, "color", "holo_green_dark", colorToSpecialHex(Integer.parseInt(Prefs.getString(COLOR_ACCENT_SECONDARY)))}
+                COLOR_ACCENT_SECONDARY, FRAMEWORK_PACKAGE, "color", "holo_blue_dark", colorToSpecialHex(Integer.parseInt(Prefs.getString(COLOR_ACCENT_SECONDARY))),
+                COLOR_ACCENT_SECONDARY_LIGHT, FRAMEWORK_PACKAGE, "color", "holo_green_dark", colorToSpecialHex(Integer.parseInt(Prefs.getString(COLOR_ACCENT_SECONDARY)))
         );
     }
 
@@ -66,15 +66,15 @@ public class BasicColors extends BaseActivity implements ColorPickerDialogListen
 
     public static void applyDefaultPrimaryColors() {
         FabricatedUtil.buildAndEnableOverlays(
-                new Object[]{FRAMEWORK_PACKAGE, COLOR_ACCENT_PRIMARY, "color", "holo_blue_light", ICONIFY_COLOR_ACCENT_PRIMARY},
-                new Object[]{FRAMEWORK_PACKAGE, COLOR_ACCENT_PRIMARY_LIGHT, "color", "holo_green_light", ICONIFY_COLOR_ACCENT_PRIMARY}
+                COLOR_ACCENT_PRIMARY, FRAMEWORK_PACKAGE, "color", "holo_blue_light", ICONIFY_COLOR_ACCENT_PRIMARY,
+                COLOR_ACCENT_PRIMARY_LIGHT, FRAMEWORK_PACKAGE, "color", "holo_green_light", ICONIFY_COLOR_ACCENT_PRIMARY
         );
     }
 
     public static void applyDefaultSecondaryColors() {
         FabricatedUtil.buildAndEnableOverlays(
-                new Object[]{FRAMEWORK_PACKAGE, COLOR_ACCENT_SECONDARY, "color", "holo_blue_dark", ICONIFY_COLOR_ACCENT_SECONDARY},
-                new Object[]{FRAMEWORK_PACKAGE, COLOR_ACCENT_SECONDARY_LIGHT, "color", "holo_green_dark", ICONIFY_COLOR_ACCENT_SECONDARY}
+                COLOR_ACCENT_SECONDARY, FRAMEWORK_PACKAGE, "color", "holo_blue_dark", ICONIFY_COLOR_ACCENT_SECONDARY,
+                COLOR_ACCENT_SECONDARY_LIGHT, FRAMEWORK_PACKAGE, "color", "holo_green_dark", ICONIFY_COLOR_ACCENT_SECONDARY
         );
     }
 

@@ -52,7 +52,7 @@ public class Statusbar extends BaseActivity implements ColorPickerDialogListener
             finalSBRightPadding[0] = (int) slider.getValue();
             binding.sbRightPaddingOutput.setText(getResources().getString(R.string.opt_selected) + ' ' + finalSBRightPadding[0] + "dp");
             Prefs.putInt(FABRICATED_SB_RIGHT_PADDING, finalSBRightPadding[0]);
-            FabricatedUtil.buildAndEnableOverlay(SYSTEMUI_PACKAGE, FABRICATED_SB_RIGHT_PADDING, "dimen", "status_bar_padding_end", finalSBRightPadding[0] + "dp");
+            FabricatedUtil.buildAndEnableOverlay(FABRICATED_SB_RIGHT_PADDING, SYSTEMUI_PACKAGE, "dimen", "status_bar_padding_end", finalSBRightPadding[0] + "dp");
             binding.resetSbRightPadding.setVisibility(View.VISIBLE);
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_applied), Toast.LENGTH_SHORT).show();
         }
@@ -68,7 +68,7 @@ public class Statusbar extends BaseActivity implements ColorPickerDialogListener
             finalSBLeftPadding[0] = (int) slider.getValue();
             binding.sbLeftPaddingOutput.setText(getResources().getString(R.string.opt_selected) + ' ' + finalSBLeftPadding[0] + "dp");
             Prefs.putInt(FABRICATED_SB_LEFT_PADDING, finalSBLeftPadding[0]);
-            FabricatedUtil.buildAndEnableOverlay(SYSTEMUI_PACKAGE, FABRICATED_SB_LEFT_PADDING, "dimen", "status_bar_padding_start", finalSBLeftPadding[0] + "dp");
+            FabricatedUtil.buildAndEnableOverlay(FABRICATED_SB_LEFT_PADDING, SYSTEMUI_PACKAGE, "dimen", "status_bar_padding_start", finalSBLeftPadding[0] + "dp");
             binding.resetSbLeftPadding.setVisibility(View.VISIBLE);
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_applied), Toast.LENGTH_SHORT).show();
         }
@@ -85,10 +85,10 @@ public class Statusbar extends BaseActivity implements ColorPickerDialogListener
             binding.sbHeightOutput.setText(getResources().getString(R.string.opt_selected) + ' ' + finalSBHeight[0] + "dp");
             Prefs.putInt(FABRICATED_SB_HEIGHT, finalSBHeight[0]);
             FabricatedUtil.buildAndEnableOverlays(
-                    new Object[]{FRAMEWORK_PACKAGE, FABRICATED_SB_HEIGHT, "dimen", "status_bar_height", finalSBHeight[0] + "dp"},
-                    new Object[]{FRAMEWORK_PACKAGE, FABRICATED_SB_HEIGHT + "Default", "dimen", "status_bar_height_default", finalSBHeight[0] + "dp"},
-                    new Object[]{FRAMEWORK_PACKAGE, FABRICATED_SB_HEIGHT + "Portrait", "dimen", "status_bar_height_portrait", finalSBHeight[0] + "dp"},
-                    new Object[]{FRAMEWORK_PACKAGE, FABRICATED_SB_HEIGHT + "Landscape", "dimen", "status_bar_height_landscape", finalSBHeight[0] + "dp"}
+                    FABRICATED_SB_HEIGHT, FRAMEWORK_PACKAGE, "dimen", "status_bar_height", finalSBHeight[0] + "dp",
+                    FABRICATED_SB_HEIGHT + "Default", FRAMEWORK_PACKAGE, "dimen", "status_bar_height_default", finalSBHeight[0] + "dp",
+                    FABRICATED_SB_HEIGHT + "Portrait", FRAMEWORK_PACKAGE, "dimen", "status_bar_height_portrait", finalSBHeight[0] + "dp",
+                    FABRICATED_SB_HEIGHT + "Landscape", FRAMEWORK_PACKAGE, "dimen", "status_bar_height_landscape", finalSBHeight[0] + "dp"
             );
             binding.resetSbHeight.setVisibility(View.VISIBLE);
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_applied), Toast.LENGTH_SHORT).show();
@@ -220,13 +220,13 @@ public class Statusbar extends BaseActivity implements ColorPickerDialogListener
     }
 
     private void applySBColor() {
-        FabricatedUtil.buildAndEnableOverlays(new Object[]{SYSTEMUI_PACKAGE, "colorSBTint1", "color", "dark_mode_icon_color_dual_tone_fill", colorToSpecialHex(Integer.parseInt(colorSBTint))},
-                new Object[]{SYSTEMUI_PACKAGE, "colorSBTint2", "color", "dark_mode_icon_color_single_tone", colorToSpecialHex(Integer.parseInt(colorSBTint))},
-                new Object[]{SYSTEMUI_PACKAGE, "colorSBTint3", "color", "dark_mode_qs_icon_color_dual_tone_fill", colorToSpecialHex(Integer.parseInt(colorSBTint))},
-                new Object[]{SYSTEMUI_PACKAGE, "colorSBTint4", "color", "dark_mode_qs_icon_color_single_tone", colorToSpecialHex(Integer.parseInt(colorSBTint))},
-                new Object[]{SYSTEMUI_PACKAGE, "colorSBTint5", "color", "light_mode_icon_color_dual_tone_fill", colorToSpecialHex(Integer.parseInt(colorSBTint))},
-                new Object[]{SYSTEMUI_PACKAGE, "colorSBTint6", "color", "light_mode_icon_color_single_tone", colorToSpecialHex(Integer.parseInt(colorSBTint))},
-                new Object[]{SYSTEMUI_PACKAGE, "colorSBTint7", "color", "status_bar_clock_color", colorToSpecialHex(Integer.parseInt(colorSBTint))}
+        FabricatedUtil.buildAndEnableOverlays("colorSBTint1", SYSTEMUI_PACKAGE, "color", "dark_mode_icon_color_dual_tone_fill", colorToSpecialHex(Integer.parseInt(colorSBTint)),
+                "colorSBTint2", SYSTEMUI_PACKAGE, "color", "dark_mode_icon_color_single_tone", colorToSpecialHex(Integer.parseInt(colorSBTint)),
+                "colorSBTint3", SYSTEMUI_PACKAGE, "color", "dark_mode_qs_icon_color_dual_tone_fill", colorToSpecialHex(Integer.parseInt(colorSBTint)),
+                "colorSBTint4", SYSTEMUI_PACKAGE, "color", "dark_mode_qs_icon_color_single_tone", colorToSpecialHex(Integer.parseInt(colorSBTint)),
+                "colorSBTint5", SYSTEMUI_PACKAGE, "color", "light_mode_icon_color_dual_tone_fill", colorToSpecialHex(Integer.parseInt(colorSBTint)),
+                "colorSBTint6", SYSTEMUI_PACKAGE, "color", "light_mode_icon_color_single_tone", colorToSpecialHex(Integer.parseInt(colorSBTint)),
+                "colorSBTint7", SYSTEMUI_PACKAGE, "color", "status_bar_clock_color", colorToSpecialHex(Integer.parseInt(colorSBTint))
         );
 
         new Handler(Looper.getMainLooper()).postDelayed(SystemUtil::restartSystemUI, 1000);

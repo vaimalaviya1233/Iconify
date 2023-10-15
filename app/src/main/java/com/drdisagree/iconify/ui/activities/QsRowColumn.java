@@ -34,11 +34,11 @@ public class QsRowColumn extends BaseActivity {
 
     public static void applyRowColumn() {
         FabricatedUtil.buildAndEnableOverlays(
-                new Object[]{SYSTEMUI_PACKAGE, FABRICATED_QQS_ROW, "integer", "quick_qs_panel_max_rows", String.valueOf(Prefs.getInt(FABRICATED_QQS_ROW, 2))},
-                new Object[]{SYSTEMUI_PACKAGE, FABRICATED_QS_ROW, "integer", "quick_settings_max_rows", String.valueOf(Prefs.getInt(FABRICATED_QS_ROW, 4))},
-                new Object[]{SYSTEMUI_PACKAGE, FABRICATED_QS_COLUMN, "integer", "quick_settings_num_columns", String.valueOf(Prefs.getInt(FABRICATED_QS_COLUMN, 2))},
-                new Object[]{SYSTEMUI_PACKAGE, FABRICATED_QQS_TILE, "integer", "quick_qs_panel_max_tiles", String.valueOf((Prefs.getInt(FABRICATED_QQS_ROW, 2) * Prefs.getInt(FABRICATED_QS_COLUMN, 2)))},
-                new Object[]{SYSTEMUI_PACKAGE, FABRICATED_QS_TILE, "integer", "quick_settings_min_num_tiles", String.valueOf((Prefs.getInt(FABRICATED_QS_COLUMN, 2) * Prefs.getInt(FABRICATED_QS_ROW, 4)))}
+                FABRICATED_QQS_ROW, SYSTEMUI_PACKAGE, "integer", "quick_qs_panel_max_rows", String.valueOf(Prefs.getInt(FABRICATED_QQS_ROW, 2)),
+                FABRICATED_QS_ROW, SYSTEMUI_PACKAGE, "integer", "quick_settings_max_rows", String.valueOf(Prefs.getInt(FABRICATED_QS_ROW, 4)),
+                FABRICATED_QS_COLUMN, SYSTEMUI_PACKAGE, "integer", "quick_settings_num_columns", String.valueOf(Prefs.getInt(FABRICATED_QS_COLUMN, 2)),
+                FABRICATED_QQS_TILE, SYSTEMUI_PACKAGE, "integer", "quick_qs_panel_max_tiles", String.valueOf((Prefs.getInt(FABRICATED_QQS_ROW, 2) * Prefs.getInt(FABRICATED_QS_COLUMN, 2))),
+                FABRICATED_QS_TILE, SYSTEMUI_PACKAGE, "integer", "quick_settings_min_num_tiles", String.valueOf((Prefs.getInt(FABRICATED_QS_COLUMN, 2) * Prefs.getInt(FABRICATED_QS_ROW, 4)))
         );
     }
 

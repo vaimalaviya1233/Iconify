@@ -94,7 +94,7 @@ public class QsIconLabel extends BaseActivity {
                     binding.resetTextSize.setVisibility(View.VISIBLE);
                 }
                 Prefs.putString(FABRICATED_QS_TEXT_SIZE, String.valueOf(finalTextSize[0]));
-                FabricatedUtil.buildAndEnableOverlay(SYSTEMUI_PACKAGE, FABRICATED_QS_TEXT_SIZE, "dimen", "qs_tile_text_size", finalTextSize[0] + "sp");
+                FabricatedUtil.buildAndEnableOverlay(FABRICATED_QS_TEXT_SIZE, SYSTEMUI_PACKAGE, "dimen", "qs_tile_text_size", finalTextSize[0] + "sp");
                 Toast.makeText(getApplicationContext(), finalTextSize[0] + "sp " + getResources().getString(R.string.toast_applied), Toast.LENGTH_SHORT).show();
             }
         });
@@ -141,7 +141,7 @@ public class QsIconLabel extends BaseActivity {
                     binding.resetIconSize.setVisibility(View.VISIBLE);
                 }
                 Prefs.putString(FABRICATED_QS_ICON_SIZE, String.valueOf(finalIconSize[0]));
-                FabricatedUtil.buildAndEnableOverlay(SYSTEMUI_PACKAGE, FABRICATED_QS_ICON_SIZE, "dimen", "qs_icon_size", finalIconSize[0] + "dp");
+                FabricatedUtil.buildAndEnableOverlay(FABRICATED_QS_ICON_SIZE, SYSTEMUI_PACKAGE, "dimen", "qs_icon_size", finalIconSize[0] + "dp");
                 Toast.makeText(getApplicationContext(), finalIconSize[0] + "dp " + getResources().getString(R.string.toast_applied), Toast.LENGTH_SHORT).show();
             }
         });
@@ -343,7 +343,7 @@ public class QsIconLabel extends BaseActivity {
                     binding.resetMoveIcon.setVisibility(View.VISIBLE);
                 }
                 Prefs.putString(FABRICATED_QS_MOVE_ICON, String.valueOf(finalMoveIcon[0]));
-                FabricatedUtil.buildAndEnableOverlay(SYSTEMUI_PACKAGE, FABRICATED_QS_MOVE_ICON, "dimen", "qs_tile_start_padding", finalMoveIcon[0] + "dp");
+                FabricatedUtil.buildAndEnableOverlay(FABRICATED_QS_MOVE_ICON, SYSTEMUI_PACKAGE, "dimen", "qs_tile_start_padding", finalMoveIcon[0] + "dp");
                 Toast.makeText(getApplicationContext(), finalMoveIcon[0] + "dp " + getResources().getString(R.string.toast_applied), Toast.LENGTH_SHORT).show();
             }
         });

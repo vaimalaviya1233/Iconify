@@ -238,9 +238,9 @@ public class NavigationBar extends BaseActivity {
             Prefs.putInt(FABRICATED_PILL_BOTTOM_SPACE, finalBottomSpace[0]);
 
             FabricatedUtil.buildAndEnableOverlays(
-                    new Object[]{SYSTEMUI_PACKAGE, FABRICATED_PILL_WIDTH, "dimen", "navigation_home_handle_width", finalPillWidth[0] + "dp"},
-                    new Object[]{SYSTEMUI_PACKAGE, FABRICATED_PILL_THICKNESS, "dimen", "navigation_handle_radius", finalPillThickness[0] + "dp"},
-                    new Object[]{SYSTEMUI_PACKAGE, FABRICATED_PILL_BOTTOM_SPACE, "dimen", "navigation_handle_bottom", finalBottomSpace[0] + "dp"}
+                    FABRICATED_PILL_WIDTH, SYSTEMUI_PACKAGE, "dimen", "navigation_home_handle_width", finalPillWidth[0] + "dp",
+                    FABRICATED_PILL_THICKNESS, SYSTEMUI_PACKAGE, "dimen", "navigation_handle_radius", finalPillThickness[0] + "dp",
+                    FABRICATED_PILL_BOTTOM_SPACE, SYSTEMUI_PACKAGE, "dimen", "navigation_handle_bottom", finalBottomSpace[0] + "dp"
             );
 
             binding.pillShape.pillShapeReset.setVisibility(View.VISIBLE);

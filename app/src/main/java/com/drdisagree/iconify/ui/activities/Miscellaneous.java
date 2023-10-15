@@ -55,7 +55,7 @@ public class Miscellaneous extends BaseActivity {
         binding.enableTabletHeader.setOnCheckedChangeListener((buttonView, isChecked) -> new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Prefs.putBoolean(FABRICATED_TABLET_HEADER, isChecked);
             if (isChecked) {
-                FabricatedUtil.buildAndEnableOverlay(SYSTEMUI_PACKAGE, FABRICATED_TABLET_HEADER, "bool", "config_use_large_screen_shade_header", "1");
+                FabricatedUtil.buildAndEnableOverlay(FABRICATED_TABLET_HEADER, SYSTEMUI_PACKAGE, "bool", "config_use_large_screen_shade_header", "1");
             } else {
                 FabricatedUtil.disableOverlay(FABRICATED_TABLET_HEADER);
             }
@@ -77,8 +77,8 @@ public class Miscellaneous extends BaseActivity {
         binding.disableProgressWave.setOnCheckedChangeListener((buttonView, isChecked) -> new Handler(Looper.getMainLooper()).postDelayed(() -> {
             if (isChecked) {
                 FabricatedUtil.buildAndEnableOverlays(
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_MUSIC_AMPLITUDE, "dimen", "qs_media_seekbar_progress_amplitude", "0dp"},
-                        new Object[]{SYSTEMUI_PACKAGE, FABRICATED_MUSIC_PHASE, "dimen", "qs_media_seekbar_progress_phase", "0dp"}
+                        FABRICATED_MUSIC_AMPLITUDE, SYSTEMUI_PACKAGE, "dimen", "qs_media_seekbar_progress_amplitude", "0dp",
+                        FABRICATED_MUSIC_PHASE, SYSTEMUI_PACKAGE, "dimen", "qs_media_seekbar_progress_phase", "0dp"
                 );
             } else {
                 FabricatedUtil.disableOverlays(FABRICATED_MUSIC_AMPLITUDE, FABRICATED_MUSIC_PHASE);

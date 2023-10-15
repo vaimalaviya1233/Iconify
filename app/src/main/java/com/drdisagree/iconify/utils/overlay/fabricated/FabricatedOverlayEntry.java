@@ -6,6 +6,7 @@ import java.util.Objects;
 
 @SuppressWarnings({"unused"})
 public class FabricatedOverlayEntry {
+
     private String resourceName;
     private int resourceType;
     private int resourceValue;
@@ -41,10 +42,10 @@ public class FabricatedOverlayEntry {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FabricatedOverlayEntry that = (FabricatedOverlayEntry) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        FabricatedOverlayEntry that = (FabricatedOverlayEntry) obj;
         return resourceType == that.resourceType &&
                 resourceValue == that.resourceValue &&
                 Objects.equals(resourceName, that.resourceName);
