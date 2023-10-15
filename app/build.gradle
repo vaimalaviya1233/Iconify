@@ -12,8 +12,8 @@ android {
         applicationId "com.drdisagree.iconify"
         minSdk 31
         targetSdk 34
-        versionCode 14
-        versionName "6.5.0"
+        versionCode 15
+        versionName "6.5.1"
         setProperty("archivesBaseName", "Iconify v" + versionName)
         buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
 
@@ -109,7 +109,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.12.0'
 
     // Data Binding
-    implementation 'com.android.databinding:library:8.1.1'
+    implementation 'com.android.databinding:library:8.1.2'
 
     // Xposed API
     compileOnly files('libs/api-82.jar')
