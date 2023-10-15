@@ -26,8 +26,8 @@ import com.drdisagree.iconify.databinding.ActivitySettingsIconsBinding;
 import com.drdisagree.iconify.ui.utils.ViewHelper;
 import com.drdisagree.iconify.ui.views.LoadingDialog;
 import com.drdisagree.iconify.ui.views.RadioDialog;
-import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 import com.drdisagree.iconify.utils.SystemUtil;
+import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 import com.drdisagree.iconify.utils.overlay.manager.SettingsIconResourceManager;
 
 import java.io.IOException;
@@ -117,7 +117,7 @@ public class SettingsIcons extends BaseActivity implements RadioDialog.RadioDial
         refreshBackground();
 
         // Enable and disable button
-        if (Prefs.getBoolean("IconifyComponentSIP1.overlay"))
+        if (OverlayUtil.isOverlayEnabled("IconifyComponentSIP1.overlay"))
             binding.disableSettingsIcons.setVisibility(View.VISIBLE);
 
         binding.enableSettingsIcons.setOnClickListener(v -> {
@@ -230,7 +230,7 @@ public class SettingsIcons extends BaseActivity implements RadioDialog.RadioDial
             parent.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.container_selected));
             ((TextView) parent.findViewById(R.id.iconpack_title)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
             ((TextView) parent.findViewById(R.id.iconpack_desc)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
-            parent.findViewById(R.id.icon_selected).setVisibility(Prefs.getBoolean("IconifyComponentSIP1.overlay") ? View.VISIBLE : View.INVISIBLE);
+            parent.findViewById(R.id.icon_selected).setVisibility(OverlayUtil.isOverlayEnabled("IconifyComponentSIP1.overlay") ? View.VISIBLE : View.INVISIBLE);
             parent.findViewById(R.id.iconpack_desc).setAlpha(0.8f);
         } else {
             parent.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.item_background_material));

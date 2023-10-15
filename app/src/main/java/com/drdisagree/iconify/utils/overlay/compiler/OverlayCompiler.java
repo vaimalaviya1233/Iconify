@@ -1,4 +1,4 @@
-package com.drdisagree.iconify.utils.compiler;
+package com.drdisagree.iconify.utils.overlay.compiler;
 
 import static com.drdisagree.iconify.common.Dynamic.AAPT;
 import static com.drdisagree.iconify.common.Dynamic.ZIPALIGN;

@@ -9,7 +9,7 @@ import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 
 public class TilePitchBlack extends TileService {
 
-    private boolean isPitchBlackEnabled = Prefs.getBoolean("IconifyComponentQSPBD.overlay") || Prefs.getBoolean("IconifyComponentQSPBA.overlay");
+    private boolean isPitchBlackEnabled = OverlayUtil.isOverlayEnabled("IconifyComponentQSPBD.overlay") || Prefs.getBoolean("IconifyComponentQSPBA.overlay");
 
     @Override
     public void onTileAdded() {
@@ -33,10 +33,10 @@ public class TilePitchBlack extends TileService {
     public void onClick() {
         super.onClick();
 
-        if (Prefs.getBoolean("IconifyComponentQSPBD.overlay")) {
+        if (OverlayUtil.isOverlayEnabled("IconifyComponentQSPBD.overlay")) {
             OverlayUtil.changeOverlayState("IconifyComponentQSPBD.overlay", false, "IconifyComponentQSPBA.overlay", true);
             isPitchBlackEnabled = true;
-        } else if (Prefs.getBoolean("IconifyComponentQSPBA.overlay")) {
+        } else if (OverlayUtil.isOverlayEnabled("IconifyComponentQSPBA.overlay")) {
             OverlayUtil.disableOverlay("IconifyComponentQSPBA.overlay");
             isPitchBlackEnabled = false;
         } else {
@@ -47,7 +47,7 @@ public class TilePitchBlack extends TileService {
         Tile pitchBlackTile = getQsTile();
         pitchBlackTile.setState(isPitchBlackEnabled ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
         pitchBlackTile.setLabel(getResources().getString(R.string.tile_pitch_black));
-        pitchBlackTile.setSubtitle(Prefs.getBoolean("IconifyComponentQSPBD.overlay") ? getResources().getString(R.string.tile_pitch_black_dark) : (Prefs.getBoolean("IconifyComponentQSPBA.overlay") ? getResources().getString(R.string.tile_pitch_black_amoled) : getResources().getString(R.string.general_off)));
+        pitchBlackTile.setSubtitle(OverlayUtil.isOverlayEnabled("IconifyComponentQSPBD.overlay") ? getResources().getString(R.string.tile_pitch_black_dark) : (Prefs.getBoolean("IconifyComponentQSPBA.overlay") ? getResources().getString(R.string.tile_pitch_black_amoled) : getResources().getString(R.string.general_off)));
         pitchBlackTile.updateTile();
     }
 

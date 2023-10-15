@@ -89,25 +89,6 @@ public abstract class ApkSignerV2 {
     }
 
     /**
-     * Signer configuration.
-     */
-    public static final class SignerConfig {
-        /**
-         * Private key.
-         */
-        public PrivateKey privateKey;
-        /**
-         * Certificates, with the first certificate containing the public key corresponding to
-         * {@link #privateKey}.
-         */
-        public List<X509Certificate> certificates;
-        /**
-         * List of signature algorithms with which to sign (see {@code SIGNATURE_...} constants).
-         */
-        public List<Integer> signatureAlgorithms;
-    }
-
-    /**
      * Signs the provided APK using APK Signature Scheme v2 and returns the signed APK as a list of
      * consecutive chunks.
      *
@@ -508,19 +489,6 @@ public abstract class ApkSignerV2 {
                 });
     }
 
-    private static final class V2SignatureSchemeBlock {
-        private static final class Signer {
-            public byte[] signedData;
-            public List<Pair<Integer, byte[]>> signatures;
-            public byte[] publicKey;
-        }
-
-        private static final class SignedData {
-            public List<Pair<Integer, byte[]>> digests;
-            public List<byte[]> certificates;
-        }
-    }
-
     private static byte[] encodePublicKey(PublicKey publicKey) throws InvalidKeyException {
         byte[] encodedPublicKey = null;
         if ("X.509".equals(publicKey.getFormat())) {
@@ -695,6 +663,38 @@ public abstract class ApkSignerV2 {
             default:
                 throw new IllegalArgumentException(
                         "Unknown content digest algorithm: " + digestAlgorithm);
+        }
+    }
+
+    /**
+     * Signer configuration.
+     */
+    public static final class SignerConfig {
+        /**
+         * Private key.
+         */
+        public PrivateKey privateKey;
+        /**
+         * Certificates, with the first certificate containing the public key corresponding to
+         * {@link #privateKey}.
+         */
+        public List<X509Certificate> certificates;
+        /**
+         * List of signature algorithms with which to sign (see {@code SIGNATURE_...} constants).
+         */
+        public List<Integer> signatureAlgorithms;
+    }
+
+    private static final class V2SignatureSchemeBlock {
+        private static final class Signer {
+            public byte[] signedData;
+            public List<Pair<Integer, byte[]>> signatures;
+            public byte[] publicKey;
+        }
+
+        private static final class SignedData {
+            public List<Pair<Integer, byte[]>> digests;
+            public List<byte[]> certificates;
         }
     }
 

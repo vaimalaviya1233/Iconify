@@ -2,6 +2,7 @@ package com.drdisagree.iconify.utils.overlay;
 
 import android.util.Log;
 
+import com.drdisagree.iconify.BuildConfig;
 import com.drdisagree.iconify.Iconify;
 import com.drdisagree.iconify.common.Resources;
 import com.drdisagree.iconify.config.Prefs;
@@ -11,6 +12,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @SuppressWarnings({"unused"})
 public class OverlayUtil {
@@ -55,6 +58,24 @@ public class OverlayUtil {
         try {
             Prefs.putBoolean(pkgName, true);
             Iconify.mRootServiceProvider.enableOverlay(Collections.singletonList(pkgName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void enableOverlayExclusive(String pkgName) {
+        try {
+            Prefs.putBoolean(pkgName, true);
+            Iconify.mRootServiceProvider.enableOverlayExclusive(pkgName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void enableOverlayExclusiveInCategory(String packageName) {
+        try {
+            Prefs.putBoolean(packageName, true);
+            Iconify.mRootServiceProvider.enableOverlayExclusiveInCategory(packageName);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,5 +156,56 @@ public class OverlayUtil {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static String getCategory(String pkgName) {
+        String category = BuildConfig.APPLICATION_ID.replace(".debug", "") + ".category.";
+        pkgName = pkgName.replace("IconifyComponent", "");
+
+        if (pkgName.contains("MPIP")) {
+            pkgName = keepFirstDigit(pkgName);
+            category += "media_player_icon_pack_" + pkgName.toLowerCase();
+        } else {
+            pkgName = removeAllDigits(pkgName);
+
+            switch (pkgName) {
+                case "AMAC", "AMGC" -> category += "stock_monet_colors";
+                case "BBN", "BBP" -> category += "brightness_bar_style";
+                case "MPA", "MPB", "MPS" -> category += "media_player_style";
+                case "NFN", "NFP" -> category += "notification_style";
+                case "QSNT", "QSPT" -> category += "qs_tile_text_style";
+                case "QSSN", "QSSP" -> category += "qs_shape_style";
+                case "IPAS" -> category += "icon_pack_android_style";
+                case "IPSUI" -> category += "icon_pack_sysui_style";
+                default -> category += "iconify_component_" + pkgName.toLowerCase();
+            }
+        }
+
+        return category;
+    }
+
+    private static String removeAllDigits(String input) {
+        String regex = "\\d+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.replaceAll("");
+    }
+
+    private static String keepFirstDigit(String input) {
+        StringBuilder output = new StringBuilder();
+        boolean firstDigitFound = false;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isDigit(c)) {
+                if (!firstDigitFound) {
+                    output.append(c);
+                    firstDigitFound = true;
+                }
+            } else {
+                output.append(c);
+            }
+        }
+
+        return output.toString();
     }
 }

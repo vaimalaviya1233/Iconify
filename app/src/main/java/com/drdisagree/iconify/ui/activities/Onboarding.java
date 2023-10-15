@@ -41,12 +41,12 @@ import com.drdisagree.iconify.ui.utils.Animatoo;
 import com.drdisagree.iconify.ui.views.InstallationDialog;
 import com.drdisagree.iconify.utils.FileUtil;
 import com.drdisagree.iconify.utils.ModuleUtil;
-import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 import com.drdisagree.iconify.utils.RootUtil;
 import com.drdisagree.iconify.utils.SystemUtil;
 import com.drdisagree.iconify.utils.extension.TaskExecutor;
-import com.drdisagree.iconify.utils.compiler.OnBoardingCompiler;
 import com.drdisagree.iconify.utils.helper.BackupRestore;
+import com.drdisagree.iconify.utils.overlay.OverlayUtil;
+import com.drdisagree.iconify.utils.overlay.compiler.OnBoardingCompiler;
 import com.topjohnwu.superuser.Shell;
 
 import java.io.File;

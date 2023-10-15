@@ -147,7 +147,7 @@ public class QsIconLabel extends BaseActivity {
         });
 
         // Hide text size if hide label is enabled
-        if (Prefs.getBoolean("IconifyComponentQSHL.overlay")) {
+        if (OverlayUtil.isOverlayEnabled("IconifyComponentQSHL.overlay")) {
             binding.textSizeContainer.setVisibility(View.GONE);
         }
 
@@ -268,7 +268,7 @@ public class QsIconLabel extends BaseActivity {
         });
         binding.labelSystemInverseV2Container.setOnClickListener(v -> binding.labelSystemInverseV2.toggle());
 
-        binding.labelFixtextcolor.setChecked(Prefs.getBoolean("IconifyComponentQST5.overlay"));
+        binding.labelFixtextcolor.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentQST5.overlay"));
         binding.labelFixtextcolor.setOnCheckedChangeListener((buttonView, isChecked) -> {
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if (isChecked) {
@@ -288,7 +288,7 @@ public class QsIconLabel extends BaseActivity {
         binding.labelFixtextcolorContainer.setOnClickListener(v -> binding.labelFixtextcolor.toggle());
 
         // Hide Label
-        binding.hideLabel.setChecked(Prefs.getBoolean("IconifyComponentQSHL.overlay"));
+        binding.hideLabel.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentQSHL.overlay"));
         binding.hideLabel.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 OverlayUtil.enableOverlay("IconifyComponentQSHL.overlay");

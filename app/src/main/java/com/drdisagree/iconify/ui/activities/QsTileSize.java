@@ -19,8 +19,8 @@ import com.drdisagree.iconify.config.Prefs;
 import com.drdisagree.iconify.databinding.ActivityQsTileSizeBinding;
 import com.drdisagree.iconify.ui.utils.ViewHelper;
 import com.drdisagree.iconify.ui.views.LoadingDialog;
-import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 import com.drdisagree.iconify.utils.SystemUtil;
+import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 import com.drdisagree.iconify.utils.overlay.manager.QsTileHeightManager;
 import com.google.android.material.slider.Slider;
 
@@ -171,7 +171,7 @@ public class QsTileSize extends BaseActivity {
         });
 
         // Apply and reset button
-        if (Prefs.getBoolean("IconifyComponentQSTH.overlay"))
+        if (OverlayUtil.isOverlayEnabled("IconifyComponentQSTH.overlay"))
             binding.qsTileHeightReset.setVisibility(View.VISIBLE);
 
         binding.qsTileHeightApply.setOnClickListener(v -> {

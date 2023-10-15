@@ -36,11 +36,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.drdisagree.iconify.common.Resources;
+import com.drdisagree.iconify.utils.SystemUtil;
 import com.drdisagree.iconify.utils.color.ColorUtil;
 import com.drdisagree.iconify.utils.overlay.FabricatedUtil;
-import com.drdisagree.iconify.utils.SystemUtil;
-import com.drdisagree.iconify.utils.compiler.OnDemandCompiler;
-import com.drdisagree.iconify.utils.compiler.SwitchCompiler;
+import com.drdisagree.iconify.utils.overlay.compiler.OnDemandCompiler;
+import com.drdisagree.iconify.utils.overlay.compiler.SwitchCompiler;
 import com.drdisagree.iconify.utils.overlay.manager.MonetEngineManager;
 import com.drdisagree.iconify.utils.overlay.manager.QsMarginManager;
 import com.drdisagree.iconify.utils.overlay.manager.QsTileHeightManager;

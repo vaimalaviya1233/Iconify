@@ -44,11 +44,11 @@ import com.drdisagree.iconify.config.Prefs;
 import com.drdisagree.iconify.databinding.ActivityMonetEngineBinding;
 import com.drdisagree.iconify.ui.utils.ViewHelper;
 import com.drdisagree.iconify.ui.views.RadioDialog;
+import com.drdisagree.iconify.utils.SystemUtil;
 import com.drdisagree.iconify.utils.color.ColorUtil;
+import com.drdisagree.iconify.utils.helper.ImportExport;
 import com.drdisagree.iconify.utils.overlay.FabricatedUtil;
 import com.drdisagree.iconify.utils.overlay.OverlayUtil;
-import com.drdisagree.iconify.utils.SystemUtil;
-import com.drdisagree.iconify.utils.helper.ImportExport;
 import com.drdisagree.iconify.utils.overlay.manager.MonetEngineManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.slider.Slider;
@@ -410,9 +410,9 @@ public class MonetEngine extends BaseActivity implements ColorPickerDialogListen
                     runOnUiThread(() -> {
                         if (!hasErroredOut.get()) {
                             Prefs.putBoolean(MONET_ENGINE_SWITCH, true);
-                            if (Prefs.getBoolean("IconifyComponentQSPBD.overlay")) {
+                            if (OverlayUtil.isOverlayEnabled("IconifyComponentQSPBD.overlay")) {
                                 OverlayUtil.changeOverlayState("IconifyComponentQSPBD.overlay", false, "IconifyComponentQSPBD.overlay", true);
-                            } else if (Prefs.getBoolean("IconifyComponentQSPBA.overlay")) {
+                            } else if (OverlayUtil.isOverlayEnabled("IconifyComponentQSPBA.overlay")) {
                                 OverlayUtil.changeOverlayState("IconifyComponentQSPBA.overlay", false, "IconifyComponentQSPBA.overlay", true);
                             }
                         }
@@ -812,9 +812,9 @@ public class MonetEngine extends BaseActivity implements ColorPickerDialogListen
             if (status) {
                 Prefs.putBoolean(MONET_ENGINE_SWITCH, true);
 
-                if (Prefs.getBoolean("IconifyComponentQSPBD.overlay")) {
+                if (OverlayUtil.isOverlayEnabled("IconifyComponentQSPBD.overlay")) {
                     OverlayUtil.changeOverlayState("IconifyComponentQSPBD.overlay", false, "IconifyComponentQSPBD.overlay", true);
-                } else if (Prefs.getBoolean("IconifyComponentQSPBA.overlay")) {
+                } else if (OverlayUtil.isOverlayEnabled("IconifyComponentQSPBA.overlay")) {
                     OverlayUtil.changeOverlayState("IconifyComponentQSPBA.overlay", false, "IconifyComponentQSPBA.overlay", true);
                 }
 

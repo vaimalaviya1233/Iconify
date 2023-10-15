@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.drdisagree.iconify.R;
-import com.drdisagree.iconify.config.Prefs;
 import com.drdisagree.iconify.databinding.ActivityMediaPlayerBinding;
 import com.drdisagree.iconify.ui.utils.ViewHelper;
 import com.drdisagree.iconify.utils.overlay.OverlayUtil;
@@ -24,7 +23,7 @@ public class MediaPlayer extends BaseActivity {
 
         refreshPreview();
 
-        binding.mpAccent.setChecked(Prefs.getBoolean("IconifyComponentMPA.overlay"));
+        binding.mpAccent.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentMPA.overlay"));
         binding.mpAccent.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 binding.mpSystem.setChecked(false);
@@ -37,7 +36,7 @@ public class MediaPlayer extends BaseActivity {
         });
         binding.mpAccentContainer.setOnClickListener(v -> binding.mpAccent.toggle());
 
-        binding.mpSystem.setChecked(Prefs.getBoolean("IconifyComponentMPS.overlay"));
+        binding.mpSystem.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentMPS.overlay"));
         binding.mpSystem.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 binding.mpAccent.setChecked(false);
@@ -50,7 +49,7 @@ public class MediaPlayer extends BaseActivity {
         });
         binding.mpSystemContainer.setOnClickListener(v -> binding.mpSystem.toggle());
 
-        binding.mpPitchBlack.setChecked(Prefs.getBoolean("IconifyComponentMPB.overlay"));
+        binding.mpPitchBlack.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentMPB.overlay"));
         binding.mpPitchBlack.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 binding.mpAccent.setChecked(false);
@@ -69,9 +68,9 @@ public class MediaPlayer extends BaseActivity {
         binding.mpPitchBlackPreview.previewMpBlack.setVisibility(View.GONE);
         binding.mpSystemPreview.previewMpSystem.setVisibility(View.GONE);
 
-        if (Prefs.getBoolean("IconifyComponentMPA.overlay"))
+        if (OverlayUtil.isOverlayEnabled("IconifyComponentMPA.overlay"))
             binding.mpAccentPreview.previewMpAccent.setVisibility(View.VISIBLE);
-        else if (Prefs.getBoolean("IconifyComponentMPB.overlay"))
+        else if (OverlayUtil.isOverlayEnabled("IconifyComponentMPB.overlay"))
             binding.mpPitchBlackPreview.previewMpBlack.setVisibility(View.VISIBLE);
         else
             binding.mpSystemPreview.previewMpSystem.setVisibility(View.VISIBLE);

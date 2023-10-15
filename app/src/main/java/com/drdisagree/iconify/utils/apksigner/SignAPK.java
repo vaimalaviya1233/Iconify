@@ -211,7 +211,7 @@ public class SignAPK {
 
         MessageDigest md = MessageDigest.getInstance(hash == USE_SHA256 ? "SHA256" : "SHA1");
         PrintStream print = new PrintStream(new DigestOutputStream(new ByteArrayOutputStream(), md),
-                true, "UTF-8");
+                true, StandardCharsets.UTF_8);
 
         // Digest of the entire manifest
         manifest.write(print);

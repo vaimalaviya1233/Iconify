@@ -17,8 +17,8 @@ import java.lang.ref.WeakReference;
 
 public class Iconify extends Application {
 
-    private static WeakReference<Context> contextReference;
     public static IRootServiceProvider mRootServiceProvider;
+    private static WeakReference<Context> contextReference;
 
     public static Context getAppContext() {
         return contextReference.get();

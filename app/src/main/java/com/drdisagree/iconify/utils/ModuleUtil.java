@@ -17,9 +17,9 @@ import com.drdisagree.iconify.R;
 import com.drdisagree.iconify.common.Resources;
 import com.drdisagree.iconify.config.Prefs;
 import com.drdisagree.iconify.ui.activities.Onboarding;
-import com.drdisagree.iconify.utils.overlay.FabricatedUtil;
 import com.drdisagree.iconify.utils.helper.BackupRestore;
 import com.drdisagree.iconify.utils.helper.BinaryInstaller;
+import com.drdisagree.iconify.utils.overlay.FabricatedUtil;
 import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 import com.topjohnwu.superuser.Shell;
 

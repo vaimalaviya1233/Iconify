@@ -61,6 +61,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 public class BackgroundChip extends ModPack implements IXposedHookLoadPackage {
 
     private static final String TAG = "Iconify - " + BackgroundChip.class.getSimpleName() + ": ";
+    private final LinearLayout mQsStatusIconsContainer = new LinearLayout(mContext);
     boolean mShowSBClockBg = false;
     boolean hideStatusIcons = false;
     boolean mShowQSStatusIconsBg = false;
@@ -70,15 +71,14 @@ public class BackgroundChip extends ModPack implements IXposedHookLoadPackage {
     int statusBarClockChipStyle = 0;
     int statusBarClockColorOption = 0;
     int statusBarClockColorCode = Color.WHITE;
-    private int constraintLayoutId = -1;
     boolean fixedStatusIcons = false;
+    private int constraintLayoutId = -1;
     private ViewGroup header = null;
     private View mClockView = null;
     private View mCenterClockView = null;
     private View mRightClockView = null;
     private Class<?> DependencyClass = null;
     private Class<?> DarkIconDispatcherClass = null;
-    private final LinearLayout mQsStatusIconsContainer = new LinearLayout(mContext);
     private XC_LoadPackage.LoadPackageParam mLoadPackageParam = null;
 
     public BackgroundChip(Context context) {

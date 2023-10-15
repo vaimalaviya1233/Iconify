@@ -59,27 +59,27 @@ public class ColorEngine extends BaseFragment {
         });
 
         // Apply monet accent and gradient
-        binding.applyMonetAccent.setChecked(Prefs.getBoolean("IconifyComponentAMAC.overlay"));
+        binding.applyMonetAccent.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentAMAC.overlay"));
         binding.applyMonetAccent.setOnCheckedChangeListener(monetAccentListener);
 
-        binding.applyMonetGradient.setChecked(Prefs.getBoolean("IconifyComponentAMGC.overlay"));
+        binding.applyMonetGradient.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentAMGC.overlay"));
         binding.applyMonetGradient.setOnCheckedChangeListener(monetGradientListener);
 
         binding.applyMonetAccentContainer.setOnClickListener(v -> binding.applyMonetAccent.toggle());
         binding.applyMonetGradientContainer.setOnClickListener(v -> binding.applyMonetGradient.toggle());
 
         // Pitch Black Dark
-        binding.applyPitchBlackDarkTheme.setChecked(Prefs.getBoolean("IconifyComponentQSPBD.overlay"));
+        binding.applyPitchBlackDarkTheme.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentQSPBD.overlay"));
         binding.applyPitchBlackDarkTheme.setOnCheckedChangeListener(pitchBlackDarkListener);
         binding.applyPitchBlackDarkThemeContainer.setOnClickListener(v -> binding.applyPitchBlackDarkTheme.toggle());
 
         // Pitch Black Amoled
-        binding.applyPitchBlackAmoledTheme.setChecked(Prefs.getBoolean("IconifyComponentQSPBA.overlay"));
+        binding.applyPitchBlackAmoledTheme.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentQSPBA.overlay"));
         binding.applyPitchBlackAmoledTheme.setOnCheckedChangeListener(pitchBlackAmoledListener);
         binding.applyPitchBlackAmoledThemeContainer.setOnClickListener(v -> binding.applyPitchBlackAmoledTheme.toggle());
 
         // Minimal QsPanel
-        binding.applyMinimalQspanel.setChecked(Prefs.getBoolean("IconifyComponentQSST.overlay"));
+        binding.applyMinimalQspanel.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentQSST.overlay"));
         if (minimalQsListener == null) {
             initializeMinimalQsListener();
         }
@@ -87,7 +87,7 @@ public class ColorEngine extends BaseFragment {
         binding.applyMinimalQspanelContainer.setOnClickListener(v -> binding.applyMinimalQspanel.toggle());
 
         // Disable Monet
-        binding.disableMonet.setChecked(Prefs.getBoolean("IconifyComponentDM.overlay"));
+        binding.disableMonet.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentDM.overlay"));
         binding.disableMonet.setOnCheckedChangeListener((buttonView, isChecked) -> new Handler(Looper.getMainLooper()).postDelayed(() -> {
             if (isChecked) {
                 OverlayUtil.enableOverlay("IconifyComponentDM.overlay");

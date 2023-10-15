@@ -1,6 +1,6 @@
 package com.drdisagree.iconify.utils.overlay.manager;
 
-import com.drdisagree.iconify.utils.compiler.QsTileHeightCompiler;
+import com.drdisagree.iconify.utils.overlay.compiler.QsTileHeightCompiler;
 
 import java.io.IOException;
 

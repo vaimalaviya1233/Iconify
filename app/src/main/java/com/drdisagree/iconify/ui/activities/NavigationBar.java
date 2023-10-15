@@ -19,9 +19,9 @@ import com.drdisagree.iconify.R;
 import com.drdisagree.iconify.config.Prefs;
 import com.drdisagree.iconify.databinding.ActivityNavigationBarBinding;
 import com.drdisagree.iconify.ui.utils.ViewHelper;
+import com.drdisagree.iconify.utils.SystemUtil;
 import com.drdisagree.iconify.utils.overlay.FabricatedUtil;
 import com.drdisagree.iconify.utils.overlay.OverlayUtil;
-import com.drdisagree.iconify.utils.SystemUtil;
 import com.google.android.material.slider.Slider;
 import com.topjohnwu.superuser.Shell;
 
@@ -42,14 +42,14 @@ public class NavigationBar extends BaseActivity {
         ViewHelper.setHeader(this, binding.header.toolbar, R.string.activity_title_navigation_bar);
 
         // Switch states
-        binding.nbFullscreen.setChecked(Prefs.getBoolean("IconifyComponentNBFullScreen.overlay"));
-        binding.nbImmersive.setChecked(Prefs.getBoolean("IconifyComponentNBImmersive.overlay"));
-        binding.nbImmersivev2.setChecked(Prefs.getBoolean("IconifyComponentNBImmersiveSmall.overlay"));
-        binding.nbImmersivev3.setChecked(Prefs.getBoolean("IconifyComponentNBImmersiveSmaller.overlay"));
-        binding.nbLowerSens.setChecked(Prefs.getBoolean("IconifyComponentNBLowSens.overlay"));
-        binding.nbHidePill.setChecked(Prefs.getBoolean("IconifyComponentNBHidePill.overlay"));
-        binding.nbMonetPill.setChecked(Prefs.getBoolean("IconifyComponentNBMonetPill.overlay"));
-        binding.nbHideKbButtons.setChecked(Prefs.getBoolean("IconifyComponentNBHideKBButton.overlay"));
+        binding.nbFullscreen.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentNBFullScreen.overlay"));
+        binding.nbImmersive.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentNBImmersive.overlay"));
+        binding.nbImmersivev2.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentNBImmersiveSmall.overlay"));
+        binding.nbImmersivev3.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentNBImmersiveSmaller.overlay"));
+        binding.nbLowerSens.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentNBLowSens.overlay"));
+        binding.nbHidePill.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentNBHidePill.overlay"));
+        binding.nbMonetPill.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentNBMonetPill.overlay"));
+        binding.nbHideKbButtons.setChecked(OverlayUtil.isOverlayEnabled("IconifyComponentNBHideKBButton.overlay"));
         binding.nbDisableLeftGesture.setChecked(initialize_left_gesture_switch());
         binding.nbDisableRightGesture.setChecked(initialize_right_gesture_switch());
         binding.nbHidePill.setEnabled(!binding.nbFullscreen.isChecked());

@@ -21,8 +21,8 @@ import com.drdisagree.iconify.config.RPrefs;
 import com.drdisagree.iconify.databinding.ActivityQsPanelMarginBinding;
 import com.drdisagree.iconify.ui.utils.ViewHelper;
 import com.drdisagree.iconify.ui.views.LoadingDialog;
-import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 import com.drdisagree.iconify.utils.SystemUtil;
+import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 import com.drdisagree.iconify.utils.overlay.manager.QsMarginManager;
 import com.google.android.material.slider.Slider;
 
@@ -116,7 +116,7 @@ public class QsPanelMargin extends BaseActivity {
         });
 
         // Apply and reset button
-        if (Prefs.getBoolean("IconifyComponentHSIZE1.overlay") || Prefs.getBoolean("IconifyComponentHSIZE2.overlay"))
+        if (OverlayUtil.isOverlayEnabled("IconifyComponentHSIZE1.overlay") || Prefs.getBoolean("IconifyComponentHSIZE2.overlay"))
             binding.qsMarginReset.setVisibility(View.VISIBLE);
 
         binding.qsMarginApply.setOnClickListener(v -> {

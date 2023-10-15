@@ -11,7 +11,7 @@ import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 
 public class TileMonetEngine extends TileService {
 
-    private boolean isCustomMonetEnabled = Prefs.getBoolean("IconifyComponentME.overlay");
+    private boolean isCustomMonetEnabled = OverlayUtil.isOverlayEnabled("IconifyComponentME.overlay");
 
     @Override
     public void onTileAdded() {
@@ -40,9 +40,9 @@ public class TileMonetEngine extends TileService {
         } else {
             OverlayUtil.enableOverlays("IconifyComponentDM.overlay", "IconifyComponentME.overlay");
 
-            if (Prefs.getBoolean("IconifyComponentQSPBD.overlay")) {
+            if (OverlayUtil.isOverlayEnabled("IconifyComponentQSPBD.overlay")) {
                 OverlayUtil.changeOverlayState("IconifyComponentQSPBD.overlay", false, "IconifyComponentQSPBD.overlay", true);
-            } else if (Prefs.getBoolean("IconifyComponentQSPBA.overlay")) {
+            } else if (OverlayUtil.isOverlayEnabled("IconifyComponentQSPBA.overlay")) {
                 OverlayUtil.changeOverlayState("IconifyComponentQSPBA.overlay", false, "IconifyComponentQSPBA.overlay", true);
             }
         }

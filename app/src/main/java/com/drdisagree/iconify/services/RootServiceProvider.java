@@ -38,9 +38,9 @@ public class RootServiceProvider extends RootService {
 
     static class RootServiceImpl extends IRootServiceProvider.Stub {
 
-        private static IOverlayManager mOMS;
         private static final UserHandle currentUser;
         private static final int currentUserId;
+        private static IOverlayManager mOMS;
         private static Class<?> foClass;
         private static Class<?> fobClass;
         private static Class<?> omtbClass;
@@ -87,12 +87,18 @@ public class RootServiceProvider extends RootService {
             return mOMS;
         }
 
+        /**
+         * Return true if an overlay package is installed.
+         */
         @Override
         public boolean isOverlayInstalled(String packageName) throws RemoteException {
             OverlayInfo info = getOMS().getOverlayInfo(packageName, currentUserId);
             return info != null;
         }
 
+        /**
+         * Return true if an overlay package is enabled.
+         */
         @Override
         public boolean isOverlayEnabled(String packageName) throws RemoteException {
             OverlayInfo info = getOMS().getOverlayInfo(packageName, currentUserId);
@@ -105,6 +111,9 @@ public class RootServiceProvider extends RootService {
             }
         }
 
+        /**
+         * Request that an overlay package be enabled when possible to do so.
+         */
         @Override
         public void enableOverlay(List<String> packages) throws RemoteException {
             for (String p : packages) {
@@ -112,6 +121,27 @@ public class RootServiceProvider extends RootService {
             }
         }
 
+        /**
+         * Request that an overlay package is enabled and any other overlay packages with the same
+         * target package are disabled.
+         */
+        @Override
+        public boolean enableOverlayExclusive(String packageName) throws RemoteException {
+            return getOMS().setEnabledExclusive(packageName, true, currentUserId);
+        }
+
+        /**
+         * Request that an overlay package is enabled and any other overlay packages with the same
+         * target package and category are disabled.
+         */
+        @Override
+        public boolean enableOverlayExclusiveInCategory(String packageName) throws RemoteException {
+            return getOMS().setEnabledExclusiveInCategory(packageName, currentUserId);
+        }
+
+        /**
+         * Request that an overlay package be disabled when possible to do so.
+         */
         @Override
         public void disableOverlay(List<String> packages) throws RemoteException {
             for (String p : packages) {
@@ -234,26 +264,43 @@ public class RootServiceProvider extends RootService {
             }
         }
 
+        /**
+         * Change the priority of the given overlay to the highest priority relative to
+         * the other overlays with the same target and user.
+         */
         @Override
-        public void setHighestPriority(String packageName) throws RemoteException {
-
+        public boolean setHighestPriority(String packageName) throws RemoteException {
+            return (boolean) getOMS().setHighestPriority(packageName, currentUserId);
         }
 
+        /**
+         * Change the priority of the given overlay to the lowest priority relative to
+         * the other overlays with the same target and user.
+         */
         @Override
-        public void setLowestPriority(String packageName) throws RemoteException {
-
+        public boolean setLowestPriority(String packageName) throws RemoteException {
+            return (boolean) getOMS().setLowestPriority(packageName, currentUserId);
         }
 
+        /**
+         * Uninstall any overlay updates for the given package name.
+         */
         @Override
         public void uninstallOverlayUpdates(String packageName) throws RemoteException {
             runCommand(Collections.singletonList("pm uninstall " + packageName));
         }
 
+        /**
+         * Restart systemui.
+         */
         @Override
         public void restartSystemUI() throws RemoteException {
             runCommand(Collections.singletonList("killall com.android.systemui"));
         }
 
+        /**
+         * Run list of commands as root.
+         */
         @Override
         public String[] runCommand(List<String> command) {
             return Shell.cmd(command.toArray(new String[0])).exec().getOut().toArray(new String[0]);
@@ -261,6 +308,20 @@ public class RootServiceProvider extends RootService {
 
         private void commit(Object transaction) throws Exception {
             getOMS().commit((OverlayManagerTransaction) transaction);
+        }
+
+        /**
+         * Run a method with root.
+         */
+        public void runWithRoot(MethodInterface method) {
+            method.run();
+        }
+
+        /**
+         * Interface for running a method with root.
+         */
+        public interface MethodInterface {
+            void run();
         }
     }
 }

@@ -38,8 +38,8 @@ public class FabricatedOverlay {
 
     public static OverlayIdentifier generateOverlayIdentifier(String overlayName, String sourcePackage) {
         try {
-        Constructor<?> constructor = oiClass.getConstructor(String.class, String.class);
-        return (OverlayIdentifier) constructor.newInstance(sourcePackage, overlayName);
+            Constructor<?> constructor = oiClass.getConstructor(String.class, String.class);
+            return (OverlayIdentifier) constructor.newInstance(sourcePackage, overlayName);
         } catch (Exception e) {
             Log.e("FabricatedOverlay", "generateOverlayIdentifier: ", e);
             return null;

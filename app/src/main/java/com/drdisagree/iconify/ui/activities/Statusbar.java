@@ -23,9 +23,9 @@ import com.drdisagree.iconify.R;
 import com.drdisagree.iconify.config.Prefs;
 import com.drdisagree.iconify.databinding.ActivityStatusbarBinding;
 import com.drdisagree.iconify.ui.utils.ViewHelper;
+import com.drdisagree.iconify.utils.SystemUtil;
 import com.drdisagree.iconify.utils.overlay.FabricatedUtil;
 import com.drdisagree.iconify.utils.overlay.OverlayUtil;
-import com.drdisagree.iconify.utils.SystemUtil;
 import com.google.android.material.slider.Slider;
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
@@ -167,7 +167,7 @@ public class Statusbar extends BaseActivity implements ColorPickerDialogListener
         //set current choosen style
         selectedStyle = Prefs.getString(FABRICATED_SB_COLOR_SOURCE);
 
-        if (Objects.equals(selectedStyle, "Monet") || Prefs.getBoolean("IconifyComponentSBTint.overlay")) {
+        if (Objects.equals(selectedStyle, "Monet") || OverlayUtil.isOverlayEnabled("IconifyComponentSBTint.overlay")) {
             binding.sbTintMonet.setChecked(true);
             Prefs.putString(FABRICATED_SB_COLOR_SOURCE, "Monet");
         } else if (Objects.equals(selectedStyle, "System"))

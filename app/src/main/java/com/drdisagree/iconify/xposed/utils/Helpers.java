@@ -141,8 +141,7 @@ public class Helpers {
     }
 
     public static void dumpChildViews(Context context, View view) {
-        if (view instanceof ViewGroup) {
-            ViewGroup viewGroup = (ViewGroup) view;
+        if (view instanceof ViewGroup viewGroup) {
             logViewInfo(context, viewGroup, 0);
             dumpChildViewsRecursive(context, viewGroup, 0);
         } else {

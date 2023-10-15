@@ -2,7 +2,7 @@ package com.drdisagree.iconify.utils.overlay.manager;
 
 import com.drdisagree.iconify.config.Prefs;
 import com.drdisagree.iconify.utils.color.ColorUtil;
-import com.drdisagree.iconify.utils.compiler.MonetCompiler;
+import com.drdisagree.iconify.utils.overlay.compiler.MonetCompiler;
 
 import java.io.IOException;
 import java.util.List;

@@ -4,12 +4,11 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
 import com.drdisagree.iconify.R;
-import com.drdisagree.iconify.config.Prefs;
 import com.drdisagree.iconify.utils.overlay.OverlayUtil;
 
 public class TileNotchBarKiller extends TileService {
 
-    private boolean isNotchBarKillerEnabled = Prefs.getBoolean("IconifyComponentNBK.overlay");
+    private boolean isNotchBarKillerEnabled = OverlayUtil.isOverlayEnabled("IconifyComponentNBK.overlay");
 
     @Override
     public void onTileAdded() {

@@ -1,6 +1,6 @@
 package com.drdisagree.iconify.utils.overlay.manager;
 
-import com.drdisagree.iconify.utils.compiler.RoundnessCompiler;
+import com.drdisagree.iconify.utils.overlay.compiler.RoundnessCompiler;
 
 import java.io.IOException;
 
